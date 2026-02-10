@@ -78,6 +78,20 @@ export default function HomePage() {
   
   // Language
   const { language } = useLanguageStore();
+  type Localized<T> = T & Record<string, any>;
+
+const pick = (item: Localized<any> | undefined, key: string, fallback = "") => {
+  if (!item) return fallback;
+
+  // لو أنت مسمي الحقول: key_en و key_ar
+  const v =
+    language === "en"
+      ? item[`${key}_en`]
+      : item[`${key}`];
+
+  return (v ?? fallback) as string;
+};
+
 
   // --- DATA FIDELITY PROTOCOL: PRESERVE & UTILIZE ---
   useEffect(() => {
@@ -92,6 +106,9 @@ export default function HomePage() {
 
         const sortedSlides = slidesData.items.sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0));
         setSlides(sortedSlides);
+        console.log("slides length:", sortedSlides.length);
+console.log("first slide:", sortedSlides[0]);
+console.log("active slide:", sortedSlides[0]);
         setProjects(projectsData.items);
         setFuturePlans(plansData.items);
         setServices(servicesData.items);
@@ -142,13 +159,13 @@ export default function HomePage() {
         </AnimatedElement>
 
         {/* 1.2 The Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 lg:gap-6 h-auto lg:h-[800px]">
+        <div className="grid grid--1 md:grid-cols-12 gap-4 lg:gap-6 h-auto lg:h-[800px]">
           
           {/* CELL 1: Primary Active Slide Content (Green Block) */}
           <div className="md:col-span-7 lg:col-span-5 bg-secondary rounded-[2.5rem] p-8 lg:p-12 flex flex-col justify-between relative overflow-hidden group">
             <div className="absolute top-0 right-0 p-8 opacity-20 group-hover:opacity-40 transition-opacity duration-500">
               <StarburstIcon className="w-32 h-32 animate-spin-slow" />
-            </div>
+            </div>cols
             
             <div className="relative z-10 h-full flex flex-col justify-between">
               <div className="space-y-2">
@@ -166,21 +183,28 @@ export default function HomePage() {
                       exit={{ opacity: 0, y: -20 }}
                       transition={{ duration: 0.5 }}
                     >
-                      <h2 className="font-heading text-3xl lg:text-5xl mb-6 leading-tight">
-                        {slides[currentSlide].slideTitle}
-                      </h2>
-                      <p className="font-paragraph text-lg lg:text-xl mb-8 max-w-md leading-relaxed opacity-80">
-                        {slides[currentSlide].slideDescription}
-                      </p>
-                      {slides[currentSlide].callToActionUrl && (
-                        <Link 
-                          to={slides[currentSlide].callToActionUrl!}
-                          className="inline-flex items-center gap-3 px-8 py-4 bg-black text-white rounded-full font-heading text-sm uppercase tracking-wider hover:bg-white hover:text-black transition-all duration-300 border border-black"
-                        >
-                          {slides[currentSlide].callToActionText || t('exploreNow', language)}
-                          <ArrowRight className="w-4 h-4" />
-                        </Link>
-                      )}
+                     
+                     
+                     
+        
+
+...
+ 
+<h2 className="font-heading text-3xl lg:text-5xl mb-6 leading-tight">
+  {pick(slides[currentSlide], "slideTitle", t("heroTitle", language))}
+</h2>
+
+<p className="font-paragraph text-lg lg:text-xl mb-8 max-w-md leading-relaxed opacity-80">
+  {pick(slides[currentSlide], "slideDescription", t("innovationDesc", language))}
+</p>
+
+{slides[currentSlide]?.callToActionUrl && (
+  <Link to={slides[currentSlide].callToActionUrl} className="...">
+    {pick(slides[currentSlide], "callToActionText", t("exploreNow", language))}
+    <ArrowRight className="w-4 h-4" />
+  </Link>
+)}
+
                     </motion.div>
                   ) : (
                     <motion.div
@@ -228,21 +252,42 @@ export default function HomePage() {
           </div>
 
           {/* CELL 3: Secondary Info (Black Block) */}
-          <div className="md:col-span-12 lg:col-span-4 bg-black rounded-[2.5rem] p-10 flex flex-col justify-center text-white relative overflow-hidden min-h-[300px]">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-            <h3 className="font-heading text-3xl mb-4 relative z-10">{t('innovationHub', language)}</h3>
-            <p className="font-paragraph text-white/60 relative z-10">
-              {t('innovationDesc', language)}
-            </p>
-            <div className="mt-8 flex gap-2">
-              {slides.map((_, idx) => (
-                <div 
-                  key={idx} 
-                  className={`h-1 rounded-full transition-all duration-500 ${idx === currentSlide ? 'w-8 bg-secondary' : 'w-2 bg-white/20'}`}
-                />
-              ))}
-            </div>
-          </div>
+          {/* CELL 3: Secondary Info (Black Block) */}
+<div className="md:col-span-12 lg:col-span-4 bg-black rounded-[2.5rem] p-10 flex flex-col justify-center text-white relative overflow-hidden min-h-[300px]">
+  <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+
+  <AnimatePresence mode="wait">
+    <motion.div
+      key={currentSlide}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.35 }}
+      className="relative z-10"
+    >
+     <h3 className="font-heading text-3xl mb-4">
+  {pick(slides[currentSlide], "slideTitle")}
+</h3>
+
+<p className="font-paragraph text-white/60">
+  {pick(slides[currentSlide], "slideDescription")}
+</p>
+
+    </motion.div>
+  </AnimatePresence>
+
+  <div className="mt-8 flex gap-2 relative z-10">
+    {slides.map((_, idx) => (
+      <div
+        key={idx}
+        className={`h-1 rounded-full transition-all duration-500 ${
+          idx === currentSlide ? "w-8 bg-secondary" : "w-2 bg-white/20"
+        }`}
+      />
+    ))}
+  </div>
+</div>
+
 
           {/* CELL 4: Visual Anchor (Image Block - Bottom Left) */}
           <div className="md:col-span-6 lg:col-span-4 bg-white rounded-[2.5rem] overflow-hidden relative min-h-[300px] lg:min-h-0">
@@ -368,9 +413,9 @@ export default function HomePage() {
                         {project.startDate ? new Date(project.startDate).toLocaleDateString() : ''}
                       </span>
                     </div>
-                    <h3 className="font-heading text-3xl mb-4 group-hover:text-secondary transition-colors">{project.projectName}</h3>
+                    <h3 className="font-heading text-3xl mb-4 group-hover:text-secondary transition-colors">{pick(project, "projectName")}</h3>
                     <p className="font-paragraph text-gray-600 mb-6 line-clamp-3">
-                      {project.projectSummary}
+                      {pick(project,"projectSummary")}
                     </p>
                     <Link to={`/projects`} className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-black text-white group-hover:bg-secondary group-hover:text-black transition-colors">
                       <ArrowRight className="w-5 h-5 -rotate-45 group-hover:rotate-0 transition-transform" />
@@ -416,9 +461,9 @@ export default function HomePage() {
                     {plan.targetDate ? new Date(plan.targetDate).getFullYear() : 'Future'}
                   </div>
                 </div>
-                <h3 className="font-heading text-2xl mb-4 group-hover:text-secondary transition-colors">{plan.planTitle}</h3>
+                <h3 className="font-heading text-2xl mb-4 group-hover:text-secondary transition-colors">{pick(plan, "planTitle")}</h3>
                 <p className="font-paragraph text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
-                  {plan.shortDescription}
+                 {pick(plan, "shortDescription")}
                 </p>
                 <div className="pt-6 border-t border-white/10 flex items-center justify-between">
                   <span className="text-xs font-heading uppercase tracking-widest text-gray-500">{t('strategicGoal', language)}</span>
@@ -456,9 +501,9 @@ export default function HomePage() {
                    index /3 === 2/3 ? <FontAwesomeIcon icon={faAmbulance} />:
                                   <FontAwesomeIcon icon={faUsers} />      }
                 </div>
-                <h3 className="font-heading text-2xl mb-4">{service.serviceName}</h3>
+                <h3 className="font-heading text-2xl mb-4">{pick(service, "serviceName")}</h3>
                 <p className="font-paragraph text-gray-600 mb-6 flex-grow">
-                  {service.serviceDescription}
+                  {pick(service, "serviceDescription")}
                 </p>
                 
                 {service.keyFeatures && (

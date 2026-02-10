@@ -9,8 +9,8 @@ export const translations = {
     contact: 'Contact',
     
     // Hero Section
-    heroTitle: 'Connecting Libya to',
-    heroTitleGradient: 'The Future of Tech.',
+    heroTitle: 'Specialized Communications',
+    heroTitleGradient: 'Towards Secure Connectivity.',
     featuredHighlight: 'Featured Highlight',
     exploreNow: 'Explore Now',
     learnMore: 'Learn More',
@@ -79,6 +79,92 @@ tetraIntegrationDesc: 'Seamless secure communication.',
     contactForm: 'Contact Form',
     copyright: '© {year} Ettisalat Nawiea Company. All rights reserved.',
     developedBy: 'Developed by: Ayser Shaqruni',
+    // tetra page 
+    tetra: "TETRA Technology",
+    tetraDesc:`TETRA Digital Communication System (Terrestrial Trunked Radio)
+
+TETRA is considered one of the most important digital communication systems used worldwide.
+
+It is distinguished by its numerous advantages, most notably security, reliability, and speed in establishing calls.
+
+It also offers several features, including private calling, group calling, and data transmission.
+
+The TETRA system is a digital communication system, meaning it provides wireless coverage for voice calls and data transmission between users or groups of users. It is also used by emergency services, such as ambulances, fire departments, traffic police, aviation authorities, electricity companies, the Great Man-Made River Project, and the National Oil Corporation.`,
+
+keyfeatures:"Key Features",
+//about page 
+
+aboutCompany:"About Ettisalat Nawiea",
+aboutDesc:`Leading the telecommunications revolution in Libya with innovative solutions, reliable infrastructure, and unwavering commitment to connecting communities.`,
+visionTitle:'Our Vision',
+vision:`To be a major pillar of security and stability through leadership and excellence in providing communications and information technology services for national emergency and safety systems for all vital and service sectors in the Libyan state`,
+missionTitle:'Our Mission',
+mission:`
+To deliver world-class telecommunications infrastructure and services that empower businesses, government agencies, and communities across Libya with secure, reliable, and innovative communication solutions.`,
+storyTitle:"Our Story",
+story:`A national company established in 2009 by Resolution No. (441) of 2009 and Resolution No. (442)
+
+concerning its articles of association, and wholly owned by the General Authority for Communications and Information Technology.
+
+It became operational at the beginning of the second quarter of 2010.
+
+The company specializes in the establishment, implementation, operation, maintenance, and management of communication systems and centers,
+
+wired and wireless, and information technology related to emergencies and public safety,
+
+as dictated by the needs of the state and contracted for their completion.`,
+//devices page
+
+radio:"Radio Devices",
+radioDesc:"Explore our comprehensive range of professional radio communication devices designed for mission-critical operations.",
+help:"Need Help Choosing?",
+helpDesc:"Our team of experts is ready to help you select the perfect radio communication solution for your specific needs.",
+callteam:"Contact Our Team",
+
+//jobs page
+
+join:"Join Our Team",
+joinDesc:`Build your career with Libya's leading telecommunications company. We're always looking for talented individuals to join our growing team.
+
+`,
+whyWork:"Why Work With Us",
+competitive:"Competitive Benefits",
+competitiveDesc:`Comprehensive compensation packages, health benefits, and work-life balance initiatives.
+
+`,
+innovative:"Innovative Environment",
+innovativeDesc:`Work with cutting-edge technology and be part of projects that shape Libya's telecommunications future.
+
+`,
+career:"Career Growth",
+careerDesc:`Continuous learning opportunities and clear career progression paths to help you reach your full potential.
+
+`,
+current:"Current Openings",
+noCurrent:"No Openings at the time",
+noCurrentDesc:`We don't have any open positions at the moment, but we're always interested in hearing from talented professionals. Feel free to send us your resume for future opportunities.
+
+`,
+submit:"Submit Your Resume",
+culture:"Our Culture",
+cultureDesc:`At Ettisalat Nawiea, we foster a collaborative and inclusive work environment where innovation thrives. Our team members are empowered to take initiative, share ideas, and contribute to meaningful projects that impact communities across Libya.
+
+  We believe in investing in our people through professional development programs, mentorship opportunities, and a supportive workplace culture that values diversity and excellence.
+
+   Join us and be part of a team that's building the future of telecommunications in Libya.`,
+
+getIn:"Get In Touch",
+getInDesc:`Have questions about our services or need technical support? We're here to help. Reach out to our team and we'll get back to you as soon as possible.`,
+contactinfo:"Contact Information",
+contactinfoDesc:`Connect with us through any of the following channels. Our team is ready to assist you with your telecommunications needs.
+
+`,
+visit:"Visit Our Office",
+visitDesc:`Located in the zawiat al-dahmani alshaat street, our office is easily accessible for in-person consultations.
+
+`
+
+
   },
   ar: {
     // Header & Navigation
@@ -90,9 +176,9 @@ tetraIntegrationDesc: 'Seamless secure communication.',
     contact: 'اتصل بنا',
     
     // Hero Section
-    heroTitle: 'ربط ليبيا بـ',
-    heroTitleGradient: 'مستقبل التكنولوجيا.',
-    featuredHighlight: 'الميزة المميزة',
+    heroTitle: 'الاتصالات النوعية ',
+    heroTitleGradient: 'نحو اتصالات آمنة .',
+    featuredHighlight: 'الميزة',
     exploreNow: 'استكشف الآن',
     learnMore: 'تعرف على المزيد',
     innovationHub: 'مركز الابتكار',
@@ -156,11 +242,85 @@ tetraIntegrationDesc: 'Seamless secure communication.',
     systemIntegration: 'تكامل الأنظمة',
     contactInfo: 'اتصل بنا',
     location: 'طرابلس، ليبيا',
-    phone: '+218 XXX XXXX',
+    phone: '+218 213409103',
     contactForm: 'نموذج الاتصال',
     copyright: '© {year} شركة الاتصالات النوعية . جميع الحقوق محفوظة.',
     developedBy: 'مطور من قبل: م.أيسر الشقروني',
-  },
+    // tetra page 
+    tetra: "تقنية تترا ",
+    tetraDesc:`
+نظام الاتصالات الرقمي  TETRA اختصار لـ  Terrestrial Trunked Radio
+
+يعتبر نظام  TETRA من أهم انظمة الاتصالات الرقمية المستخدمة في العالم
+
+لما يتميز به من ميزات عديدة أهمها الأمان والموثوقية و سرعة إنشاء المكالمة
+
+مع عدة مميزات منها خدمة الاتصال الخاص والاتصال الجماعي ونقل البيانات
+
+فنظام التيترا هو نظام اتصالات رقمي, أي يؤمن تغطية لاسلكية لإقامة مكالمات
+
+صوتية Voice services وخدمات نقل البيانات  Data services  بين
+
+مستخدمين او مجموعة مستخدمين يستخدم كذلك من قبل منظومات الطوارئ
+
+مثل الاسعاف والاطفاء و شرطة المرور ومصلحة الطيران والكهرباء ومنظومة النهر
+
+الصناعي و المؤسسة الوطنية للنفط.`,
+keyfeatures:"الميزات الاساسية",
+//about page 
+aboutCompany:"حول الشركة ",
+aboutDesc:`قيادة ثورة الاتصالات في ليبيا من خلال حلول مبتكرة وبنية تحتية موثوقة والتزام راسخ بربط المجتمعات.`,
+visionTitle:"رؤيتنا",
+vision:`أن نكون ركيزة أساسية للأمن والاستقرار من خلال الريادة والتميز في تقديم خدمات الاتصالات وتكنولوجيا المعلومات لأنظمة الطوارئ والسلامة الوطنية لجميع القطاعات الحيوية والخدمية في الدولة الليبية`,
+missionTitle:'مهمتنا',
+mission:`تقديم بنية تحتية وخدمات اتصالات عالمية المستوى تمكّن الشركات والوكالات الحكومية والمجتمعات في جميع أنحاء ليبيا من خلال حلول اتصالات آمنة وموثوقة ومبتكرة.`,
+storyTitle:"قصتنا",
+story:`شركـة وطنيـة أسست سنة 2009 بالقـــرار رقم ( 441 ) لسنـة 2009, والقــرار ( 442 )
+
+بشأن نظامها الأساسي , ومملوكة بالكامل للهيئة العامة للاتصالات والمعلوماتية.
+
+وتم تفعيلها مع بداية الربع الثاني من سنة 2010 م .
+
+تختص الشركــة في إنشــاء وتنفيذ وتشغيل وصيانة وإدارة المنظومــات ومراكــز الإتصـــالات  
+
+ السلكية و اللاسلكية وتقنية المعلومات الخاصة بالطوارئ والسلامة العامة,
+
+التي تمليها احتياجات الدولة والتعاقد على إنجازها ..`,
+// devices page
+radio:"أجهزة الراديو",
+radioDesc:`استكشف مجموعتنا الشاملة من أجهزة الاتصالات اللاسلكية الاحترافية المصممة للعمليات بالغة الأهمية.`,
+help:"هل تحتاج إلى مساعدة في الاختيار؟",
+helpDesc:"فريق خبرائنا جاهز لمساعدتك في اختيار حل الاتصالات اللاسلكية الأمثل الذي يلبي احتياجاتك الخاصة.",
+callteam:"اتصل بفريقنا",
+//jobs page
+join:"انضم لفريقنا",
+joinDesc:`ابنِ مستقبلك المهني مع شركة الاتصالات الرائدة في ليبيا. نحن نبحث دائماً عن أفراد موهوبين للانضمام إلى فريقنا المتنامي.`,
+whyWork:"لماذا نريدك ان  تعمل معنا",
+competitive:"المزايا التنافسية" ,
+competitiveDesc:`حزم تعويضات شاملة، ومزايا صحية، ومبادرات لتحقيق التوازن بين العمل والحياة.`,
+innovative:"بيئة مبتكرة",
+innovativeDesc:`اعمل مع أحدث التقنيات وكن جزءًا من المشاريع التي تشكل مستقبل الاتصالات في ليبيا.`,
+career:"النمو الوظيفي",
+careerDesc:`فرص التعلم المستمر ومسارات التطور الوظيفي الواضحة لمساعدتك على تحقيق كامل إمكاناتك.`,
+current:"الوظائف المتاحة",
+noCurrent:"لايوجد وظائف حاليا ",
+noCurrentDesc:`لا توجد لدينا وظائف شاغرة حاليًا، لكننا نرحب دائمًا بالمرشحين الموهوبين. لا تترددوا في إرسال سيرتكم الذاتية إلينا للنظر في فرص مستقبلية.`,
+submit:"ارسل الينا سيرتك الذاتية",
+culture:"ثقافتنا",
+cultureDesc:`في اتصالات ناويا، نُعزز بيئة عمل تعاونية وشاملة تُشجع الابتكار. نُمكّن أعضاء فريقنا من أخذ زمام المبادرة، ومشاركة الأفكار، والمساهمة في مشاريع هادفة تُؤثر إيجابًا على المجتمعات في جميع أنحاء ليبيا.
+
+نؤمن بالاستثمار في كوادرنا من خلال برامج التطوير المهني، وفرص الإرشاد، وثقافة عمل داعمة تُقدر التنوع والتميز.
+
+انضم إلينا وكن جزءًا من فريق يُساهم في بناء مستقبل الاتصالات في ليبيا.`,
+//contact page
+
+getIn:"تواصل معنا",
+getInDesc:`هل لديك أسئلة حول خدماتنا أو تحتاج إلى دعم فني؟ نحن هنا لمساعدتك. تواصل مع فريقنا وسنرد عليك في أقرب وقت ممكن.`,
+contactinfo:"معلومات الاتصال ",
+contactinfoDesc:`تواصل معنا عبر أي من القنوات التالية. فريقنا جاهز لمساعدتك في تلبية احتياجاتك في مجال الاتصالات.`,
+visit:"زر مكتبنا ",
+visitDesc:  `مكتبنا يقع فى زاوية الدهماني شارع الشط , يسهل الوصول إلى مكتبنا لإجراء الاستشارات الشخصية.`
+},
 };
 
 export type TranslationKey = keyof typeof translations.en;

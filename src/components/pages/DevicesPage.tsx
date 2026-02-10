@@ -8,6 +8,9 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { t } from '@/lib/translations';
+import { useLanguageStore } from '@/stores/languageStore';
+
 
 export default function DevicesPage() {
   const [devices, setDevices] = useState<RadioDevices[]>([]);
@@ -15,6 +18,7 @@ export default function DevicesPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [categories, setCategories] = useState<string[]>(['All']);
+    const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     const fetchDevices = async () => {
@@ -46,7 +50,20 @@ export default function DevicesPage() {
 
     setFilteredDevices(filtered);
   }, [searchTerm, selectedCategory, devices]);
+  const { language } =    useLanguageStore();
+  type Localized<T> = T & Record<string, any>;
 
+const pick = (item: Localized<any> | undefined, key: string, fallback = "") => {
+  if (!item) return fallback;
+
+  // لو أنت مسمي الحقول: key_en و key_ar
+  const v =
+    language === "en"
+      ? item[`${key}_en`]
+      : item[`${key}`];
+
+  return (v ?? fallback) as string;
+};
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -61,11 +78,10 @@ export default function DevicesPage() {
             className="text-center max-w-4xl mx-auto"
           >
             <h1 className="font-heading text-5xl lg:text-7xl text-primary-foreground mb-6">
-              Radio Devices
+             {t("radio",language)}
             </h1>
             <p className="font-paragraph text-lg text-primary-foreground/80">
-              Explore our comprehensive range of professional radio communication devices designed for mission-critical operations.
-            </p>
+            {t("radioDesc",language)}            </p>
           </motion.div>
         </div>
       </section>
@@ -174,8 +190,9 @@ export default function DevicesPage() {
                       </p>
                     )}
                     {device.description && (
-                      <p className="font-paragraph text-sm text-foreground/70 mb-6 line-clamp-3">
-                        {device.description}
+                      <p className ={`${expanded ? "" : "line-clamp-9"} font-paragraph text-sm text-foreground/70 mb-6 `}>
+                        {pick(device,"description")}
+                        
                       </p>
                     )}
                     {device.datasheetUrl && (
@@ -206,16 +223,15 @@ export default function DevicesPage() {
             className="text-center max-w-3xl mx-auto"
           >
             <h2 className="font-heading text-4xl lg:text-5xl text-primary-foreground mb-6">
-              Need Help Choosing?
-            </h2>
+              {t("help",language)}           </h2>
             <p className="font-paragraph text-lg text-primary-foreground/80 mb-8">
-              Our team of experts is ready to help you select the perfect radio communication solution for your specific needs.
+              {t("helpDesc",language)}           
             </p>
             <a
               href="/contact"
               className="inline-flex items-center gap-2 bg-secondary text-secondary-foreground font-paragraph text-base px-8 py-4 rounded-lg hover:opacity-90 transition-opacity"
             >
-              Contact Our Team
+              {t("callteam",language)}
             </a>
           </motion.div>
         </div>

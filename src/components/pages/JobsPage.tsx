@@ -5,7 +5,8 @@ import { BaseCrudService } from '@/integrations';
 import { JobOpenings } from '@/entities';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-
+import { t } from '@/lib/translations';
+import { useLanguageStore } from '@/stores/languageStore';
 export default function JobsPage() {
   const [jobs, setJobs] = useState<JobOpenings[]>([]);
 
@@ -17,6 +18,7 @@ export default function JobsPage() {
 
     fetchJobs();
   }, []);
+  const { language } =    useLanguageStore();
 
   return (
     <div className="min-h-screen bg-background">
@@ -32,10 +34,10 @@ export default function JobsPage() {
             className="text-center max-w-4xl mx-auto"
           >
             <h1 className="font-heading text-5xl lg:text-7xl text-primary-foreground mb-6">
-              Join Our Team
+              {t("join",language)}
             </h1>
             <p className="font-paragraph text-lg text-primary-foreground/80">
-              Build your career with Libya's leading telecommunications company. We're always looking for talented individuals to join our growing team.
+              {t("joinDesc",language)}
             </p>
           </motion.div>
         </div>
@@ -45,22 +47,24 @@ export default function JobsPage() {
       <section className="w-full py-20">
         <div className="mx-auto max-w-[120rem] px-6 lg:px-12">
           <h2 className="font-heading text-4xl lg:text-6xl text-foreground mb-16 text-center">
-            Why Work With Us
+              {t("whyWork",language)}
           </h2>
 
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                title: 'Career Growth',
-                description: 'Continuous learning opportunities and clear career progression paths to help you reach your full potential.',
+                title: `${t("career",language)}`,
+
+                description:`${t("careerDesc",language)}`
+,
               },
               {
-                title: 'Innovative Environment',
-                description: 'Work with cutting-edge technology and be part of projects that shape Libya\'s telecommunications future.',
+                title: `${t("innovative",language)}`,
+                description: `${t("innovativeDesc",language)}`,
               },
               {
-                title: 'Competitive Benefits',
-                description: 'Comprehensive compensation packages, health benefits, and work-life balance initiatives.',
+                title:`${t("competitive",language)}`,
+                description: `${t("competitiveDesc",language)}`,
               },
             ].map((benefit, index) => (
               <motion.div
@@ -87,7 +91,7 @@ export default function JobsPage() {
       <section className="w-full bg-surfacealt py-20">
         <div className="mx-auto max-w-[120rem] px-6 lg:px-12">
           <h2 className="font-heading text-4xl lg:text-6xl text-foreground mb-12 text-center">
-            Current Openings
+            {t("current",language)}
           </h2>
 
           {jobs.length === 0 ? (
@@ -98,16 +102,16 @@ export default function JobsPage() {
             >
               <Briefcase className="w-16 h-16 text-foreground/30 mx-auto mb-6" />
               <h3 className="font-heading text-3xl text-foreground mb-4">
-                No Current Openings
+               {t("noCurrent",language)}
               </h3>
               <p className="font-paragraph text-lg text-foreground/70 mb-8">
-                We don't have any open positions at the moment, but we're always interested in hearing from talented professionals. Feel free to send us your resume for future opportunities.
-              </p>
+              {t("noCurrentDesc",language)}
+                          </p>
               <a
                 href="/contact"
                 className="inline-flex items-center gap-2 bg-secondary text-secondary-foreground font-paragraph text-base px-8 py-4 rounded-lg hover:opacity-90 transition-opacity"
               >
-                Submit Your Resume
+              {t("submit",language)}
               </a>
             </motion.div>
           ) : (
@@ -206,16 +210,11 @@ export default function JobsPage() {
               viewport={{ once: true }}
             >
               <h2 className="font-heading text-4xl lg:text-5xl text-foreground mb-6">
-                Our Culture
+                {t("culture",language)}
               </h2>
               <p className="font-paragraph text-base text-foreground/80 mb-6">
-                At Ettisalat Nawiea, we foster a collaborative and inclusive work environment where innovation thrives. Our team members are empowered to take initiative, share ideas, and contribute to meaningful projects that impact communities across Libya.
-              </p>
-              <p className="font-paragraph text-base text-foreground/80 mb-6">
-                We believe in investing in our people through professional development programs, mentorship opportunities, and a supportive workplace culture that values diversity and excellence.
-              </p>
-              <p className="font-paragraph text-base text-foreground/80">
-                Join us and be part of a team that's building the future of telecommunications in Libya.
+               {t("cultureDesc",language)}
+
               </p>
             </motion.div>
 
@@ -227,7 +226,7 @@ export default function JobsPage() {
               style={{ minHeight: '400px' }}
             >
               <div className="text-center">
-                <div className="font-heading text-6xl text-secondary mb-4">500+</div>
+                <div className="font-heading text-6xl text-secondary mb-4">+100</div>
                 <div className="font-paragraph text-xl text-primary-foreground/80">
                   Team Members
                 </div>

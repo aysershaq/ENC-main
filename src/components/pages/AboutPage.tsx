@@ -3,7 +3,8 @@ import { Target, Eye, Award, Users, Globe, TrendingUp } from 'lucide-react';
 import { Image } from '@/components/ui/image';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-
+import { t } from '@/lib/translations';
+import { useLanguageStore } from '@/stores/languageStore';
 export default function AboutPage() {
   const values = [
     {
@@ -50,6 +51,7 @@ export default function AboutPage() {
       description: 'Implemented next-generation systems for enhanced performance and reliability.',
     },
   ];
+  const { language } =    useLanguageStore();
 
   return (
     <div className="min-h-screen bg-background">
@@ -64,10 +66,10 @@ export default function AboutPage() {
           className="text-center max-w-5xl mx-auto"
         >
           <h1 className="font-heading text-5xl lg:text-8xl text-foreground mb-8">
-            About Ettisalat Nawiea
+             {t("aboutCompany",language)}
           </h1>
           <p className="font-paragraph text-xl text-foreground/80">
-            Leading the telecommunications revolution in Libya with innovative solutions, reliable infrastructure, and unwavering commitment to connecting communities.
+             {t("aboutDesc",language)}
           </p>
         </motion.div>
       </section>
@@ -84,10 +86,10 @@ export default function AboutPage() {
             >
               <Target className="w-16 h-16 text-secondary-foreground mb-6" />
               <h2 className="font-heading text-4xl text-secondary-foreground mb-6">
-                Our Mission
+                {t("missionTitle",language)}
               </h2>
               <p className="font-paragraph text-lg text-secondary-foreground/90">
-                To deliver world-class telecommunications infrastructure and services that empower businesses, government agencies, and communities across Libya with secure, reliable, and innovative communication solutions.
+                {t("mission",language)}
               </p>
             </motion.div>
 
@@ -99,11 +101,10 @@ export default function AboutPage() {
             >
               <Eye className="w-16 h-16 text-secondary mb-6" />
               <h2 className="font-heading text-4xl text-foreground mb-6">
-                Our Vision
+               {t("visionTitle",language)}
               </h2>
               <p className="font-paragraph text-lg text-foreground/80">
-                To be the most trusted and advanced telecommunications provider in Libya, setting the standard for network excellence, customer service, and technological innovation in the region.
-              </p>
+                    {t("vision",language)}              </p>
             </motion.div>
           </div>
         </div>
@@ -119,18 +120,13 @@ export default function AboutPage() {
               viewport={{ once: true }}
             >
               <h2 className="font-heading text-4xl lg:text-6xl text-foreground mb-8">
-                Our Story
+                {t("storyTitle",language)}
               </h2>
               <div className="space-y-6">
-                <p className="font-paragraph text-base text-foreground/80">
-                  Ettisalat Nawiea Company was established with a clear vision: to transform Libya's telecommunications landscape through advanced technology and exceptional service. Since our inception, we have been at the forefront of deploying critical communication infrastructure.
+                <p className="font-paragraph text-[35px] text-foreground/80">
+                {t("story",language)}
                 </p>
-                <p className="font-paragraph text-base text-foreground/80">
-                  Our expertise spans TETRA networks, radio communications, and comprehensive network solutions. We serve diverse sectors including public safety, transportation, utilities, and enterprise clients, providing them with the tools they need for mission-critical operations.
-                </p>
-                <p className="font-paragraph text-base text-foreground/80">
-                  Today, we continue to expand our reach and capabilities, investing in next-generation technologies and building partnerships that strengthen Libya's communication infrastructure for the future.
-                </p>
+               
               </div>
             </motion.div>
 
@@ -151,120 +147,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Values Section */}
-      <section className="w-full bg-surfacealt py-20">
-        <div className="mx-auto max-w-[120rem] px-6 lg:px-12">
-          <h2 className="font-heading text-4xl lg:text-6xl text-foreground mb-16 text-center">
-            Our Values
-          </h2>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {values.map((value, index) => (
-              <motion.div
-                key={value.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-background rounded-2xl p-8 text-center"
-              >
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-secondary rounded-full mb-6">
-                  <value.icon className="w-8 h-8 text-secondary-foreground" />
-                </div>
-                <h3 className="font-heading text-2xl text-foreground mb-4">
-                  {value.title}
-                </h3>
-                <p className="font-paragraph text-sm text-foreground/70">
-                  {value.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Timeline Section */}
-      <section className="w-full py-20">
-        <div className="mx-auto max-w-[120rem] px-6 lg:px-12">
-          <h2 className="font-heading text-4xl lg:text-6xl text-foreground mb-16 text-center">
-            Our Journey
-          </h2>
-
-          <div className="relative">
-            {/* Timeline Line */}
-            <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-secondary/30 -translate-x-1/2" />
-
-            <div className="space-y-16">
-              {milestones.map((milestone, index) => (
-                <motion.div
-                  key={milestone.year}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className={`grid lg:grid-cols-2 gap-8 items-center ${
-                    index % 2 === 0 ? '' : 'lg:flex-row-reverse'
-                  }`}
-                >
-                  <div className={`${index % 2 === 0 ? 'lg:text-right' : 'lg:order-2'}`}>
-                    <div className="inline-block bg-secondary rounded-full px-6 py-2 mb-4">
-                      <span className="font-heading text-2xl text-secondary-foreground">
-                        {milestone.year}
-                      </span>
-                    </div>
-                    <h3 className="font-heading text-3xl text-foreground mb-4">
-                      {milestone.title}
-                    </h3>
-                    <p className="font-paragraph text-base text-foreground/70">
-                      {milestone.description}
-                    </p>
-                  </div>
-
-                  <div className={`${index % 2 === 0 ? '' : 'lg:order-1'}`}>
-                    <div className="bg-primary rounded-2xl p-8 h-48 flex items-center justify-center">
-                      <Image
-                        src={'https://static.wixstatic.com/media/29c2d1_7fa1325ff6dd46418f410a476281e47b~mv2.png?originWidth=384&originHeight=256'}
-                        alt={milestone.title}
-                        className="w-full h-full object-cover rounded-xl grayscale opacity-70"
-                      />
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="w-full bg-primary py-20">
-        <div className="mx-auto max-w-[120rem] px-6 lg:px-12">
-          <div className="grid md:grid-cols-4 gap-8">
-            {[
-              { number: '15+', label: 'Years of Experience' },
-              { number: '500+', label: 'Projects Completed' },
-              { number: '50+', label: 'Enterprise Clients' },
-              { number: '99.9%', label: 'Network Uptime' },
-            ].map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="text-center"
-              >
-                <div className="font-heading text-5xl lg:text-6xl text-secondary mb-4">
-                  {stat.number}
-                </div>
-                <div className="font-paragraph text-base text-primary-foreground/80">
-                  {stat.label}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      
+     
 
       <Footer />
     </div>

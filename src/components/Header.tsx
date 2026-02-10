@@ -22,7 +22,7 @@ export default function Header() {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <header className="bg-background sticky top-0 z-50 border-b border-foreground/10">
+    <header className="bg-white sticky top-0 z-50 border-b border-foreground/10">
       <nav className={`mx-auto max-w-[120rem] px-6 lg:px-12 py-4 ${language === 'ar' ? 'rtl' : 'ltr'}`}>
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center">

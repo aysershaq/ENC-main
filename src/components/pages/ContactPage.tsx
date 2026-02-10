@@ -6,6 +6,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { t } from '@/lib/translations';
+import { useLanguageStore } from '@/stores/languageStore';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -47,6 +49,7 @@ export default function ContactPage() {
       }, 5000);
     }, 1500);
   };
+  const { language } =    useLanguageStore();
 
   return (
     <div className="min-h-screen bg-background">
@@ -62,10 +65,10 @@ export default function ContactPage() {
             className="text-center max-w-4xl mx-auto"
           >
             <h1 className="font-heading text-5xl lg:text-7xl text-primary-foreground mb-6">
-              Get In Touch
+             {t("getIn",language)}
             </h1>
             <p className="font-paragraph text-lg text-primary-foreground/80">
-              Have questions about our services or need technical support? We're here to help. Reach out to our team and we'll get back to you as soon as possible.
+             {t("getInDesc",language)}
             </p>
           </motion.div>
         </div>
@@ -82,10 +85,10 @@ export default function ContactPage() {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <h2 className="font-heading text-4xl text-foreground mb-8">
-                Contact Information
+                    {t("contactinfo",language)}
               </h2>
               <p className="font-paragraph text-base text-foreground/70 mb-12">
-                Connect with us through any of the following channels. Our team is ready to assist you with your telecommunications needs.
+                    {t("contactinfoDesc",language)}
               </p>
 
               <div className="space-y-8">
@@ -99,7 +102,7 @@ export default function ContactPage() {
                     </h3>
                     <p className="font-paragraph text-base text-foreground/70">
                       Tripoli, Libya<br />
-                      Main Telecommunications District
+                      zawiat al-dahmani alshaat street
                     </p>
                   </div>
                 </div>
@@ -113,8 +116,8 @@ export default function ContactPage() {
                       Phone
                     </h3>
                     <p className="font-paragraph text-base text-foreground/70">
-                      +218 XXX XXXX<br />
-                      Mon-Fri: 8:00 AM - 5:00 PM
+                      +218 213409103<br />
+                      San-Fri: 8:00 AM - 3:00 PM
                     </p>
                   </div>
                 </div>
@@ -128,8 +131,8 @@ export default function ContactPage() {
                       Email
                     </h3>
                     <p className="font-paragraph text-base text-foreground/70">
-                      info@ettisalatnawiea.ly<br />
-                      support@ettisalatnawiea.ly
+                      it@enc.ly<br />
+                      
                     </p>
                   </div>
                 </div>
@@ -142,15 +145,12 @@ export default function ContactPage() {
                 </h3>
                 <div className="space-y-3">
                   <div className="flex justify-between">
-                    <span className="font-paragraph text-base text-foreground/70">Monday - Thursday</span>
-                    <span className="font-paragraph text-base text-foreground">8:00 AM - 5:00 PM</span>
+                    <span className="font-paragraph text-base text-foreground/70">Sunday - Thursday</span>
+                    <span className="font-paragraph text-base text-foreground">3:00 PM - 8:00 AM</span>
                   </div>
+                 
                   <div className="flex justify-between">
-                    <span className="font-paragraph text-base text-foreground/70">Friday</span>
-                    <span className="font-paragraph text-base text-foreground">8:00 AM - 12:00 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="font-paragraph text-base text-foreground/70">Saturday - Sunday</span>
+                    <span className="font-paragraph text-base text-foreground/70">Saturday - Friday</span>
                     <span className="font-paragraph text-base text-foreground">Closed</span>
                   </div>
                 </div>
@@ -295,10 +295,10 @@ export default function ContactPage() {
             className="text-center mb-12"
           >
             <h2 className="font-heading text-4xl lg:text-5xl text-foreground mb-6">
-              Visit Our Office
+              {t("visit",language)}
             </h2>
             <p className="font-paragraph text-base text-foreground/70 max-w-2xl mx-auto">
-              Located in the heart of Tripoli's telecommunications district, our office is easily accessible for in-person consultations.
+              {t("visitDesc",language)}
             </p>
           </motion.div>
 
@@ -308,11 +308,9 @@ export default function ContactPage() {
             viewport={{ once: true }}
             className="bg-primary rounded-2xl p-8 lg:p-12"
           >
-            <div className="aspect-video bg-background/10 rounded-xl flex items-center justify-center">
-              <p className="font-paragraph text-base text-primary-foreground/60">
-                Map placeholder - Office location in Tripoli
-              </p>
-            </div>
+           <div className="aspect-video rounded-xl overflow-hidden">
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3350.0196819749026!2d13.212088925575156!3d32.897647877813576!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13a8928e17b92623%3A0xd7d2c1a8f7def3b3!2sEtisalat%20Nawiaa%20Company%20ENC!5e0!3m2!1sar!2sly!4v1770716272209!5m2!1sar!2sly"  className='w-full h-full'  loading="lazy" ></iframe>
+        </div>
           </motion.div>
         </div>
       </section>
