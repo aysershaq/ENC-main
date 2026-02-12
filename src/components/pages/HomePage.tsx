@@ -323,9 +323,6 @@ console.log("active slide:", sortedSlides[0]);
                   {t('relaunhDesc', language)}
                 </p>
              </div>
-             <Link to="/services" className="mt-6 inline-block px-6 py-3 border border-white/20 rounded-full text-sm hover:bg-white hover:text-black transition-colors w-fit">
-                {t('checkSolutions', language)}
-             </Link>
           </div>
 
           {/* CELL 6: Brand Motif (Bottom Right - Green) */}
@@ -378,10 +375,7 @@ console.log("active slide:", sortedSlides[0]);
                 <p className="font-paragraph text-lg text-gray-600 mb-10 leading-relaxed">
                   {t('projectsDesc', language)}
                 </p>
-                <Link to="/projects" className="group inline-flex items-center gap-2 font-heading text-lg border-b-2 border-black pb-1 hover:text-secondary hover:border-secondary transition-colors">
-                  {t('viewAllProjects', language)}
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
-                </Link>
+               
               </AnimatedElement>
             </div>
           </div>
@@ -417,9 +411,7 @@ console.log("active slide:", sortedSlides[0]);
                     <p className="font-paragraph text-gray-600 mb-6 line-clamp-3">
                       {pick(project,"projectSummary")}
                     </p>
-                    <Link to={`/projects`} className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-black text-white group-hover:bg-secondary group-hover:text-black transition-colors">
-                      <ArrowRight className="w-5 h-5 -rotate-45 group-hover:rotate-0 transition-transform" />
-                    </Link>
+                   
                   </div>
                 </div>
               </AnimatedElement>
@@ -465,12 +457,7 @@ console.log("active slide:", sortedSlides[0]);
                 <p className="font-paragraph text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
                  {pick(plan, "shortDescription")}
                 </p>
-                <div className="pt-6 border-t border-white/10 flex items-center justify-between">
-                  <span className="text-xs font-heading uppercase tracking-widest text-gray-500">{t('strategicGoal', language)}</span>
-                  <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-secondary group-hover:border-secondary group-hover:text-black transition-all">
-                    <ArrowRight className="w-4 h-4" />
-                  </div>
-                </div>
+               
               </div>
             </div>
           ))}
@@ -513,9 +500,7 @@ console.log("active slide:", sortedSlides[0]);
                   </div>
                 )}
 
-                <Link to="/services" className="mt-auto w-full py-4 rounded-xl border border-black/10 flex items-center justify-center gap-2 font-heading text-sm uppercase hover:bg-black hover:text-white transition-colors">
-                  {t('learnMoreBtn', language)}
-                </Link>
+              
               </div>
             </AnimatedElement>
           ))}

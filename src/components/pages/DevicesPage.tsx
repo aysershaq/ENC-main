@@ -13,33 +13,62 @@ import { useLanguageStore } from '@/stores/languageStore';
 
 
 export default function DevicesPage() {
+
+  type CategoryOption = { value: string; label: string };
+    const { language } =    useLanguageStore();
+
   const [devices, setDevices] = useState<RadioDevices[]>([]);
   const [filteredDevices, setFilteredDevices] = useState<RadioDevices[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  const [categories, setCategories] = useState<string[]>(['All']);
+  const [categories, setCategories] = useState<CategoryOption[]>([
+  { value: 'All', label: language === 'en' ? 'All' : 'الكل' },
+]);
     const [expanded, setExpanded] = useState(false);
 
-  useEffect(() => {
-    const fetchDevices = async () => {
-      const { items } = await BaseCrudService.getAll<RadioDevices>('radiodevices');
-      setDevices(items);
-      setFilteredDevices(items);
+useEffect(() => {
+  const fetchDevices = async () => {
+    const { items } = await BaseCrudService.getAll<RadioDevices>('radiodevices');
+    setDevices(items);
 
-      const uniqueCategories = ['All', ...new Set(items.map(d => d.category).filter(Boolean) as string[])];
-      setCategories(uniqueCategories);
-    };
+    // فلترة أولية
+    setFilteredDevices(items);
 
-    fetchDevices();
-  }, []);
+    // نجمع التصنيفات بناءً على قيمة ثابتة للفلترة: device.category (العربي)
+    const map = new Map<string, string>(); // value -> label
+
+    for (const d of items) {
+      const value = (d.category ?? '').trim(); // قيمة الفلترة (عربي/ثابت)
+      if (!value) continue;
+
+      const label =
+        language === 'en'
+          ? ((d as any).category_en ?? value).trim()
+          : value;
+
+      // أول مرة فقط
+      if (!map.has(value)) map.set(value, label);
+    }
+
+    const options: CategoryOption[] = [
+      { value: 'All', label: language === 'en' ? 'All' : 'الكل' },
+      ...Array.from(map.entries()).map(([value, label]) => ({ value, label })),
+    ];
+
+    setCategories(options);
+  };
+
+  fetchDevices();
+}, [language]);
+
 
   useEffect(() => {
     let filtered = devices;
 
-    if (selectedCategory !== 'All') {
-      filtered = filtered.filter(device => device.category === selectedCategory);
-    }
-
+   if (selectedCategory !== 'All') {
+  const selected = selectedCategory.trim().toLowerCase();
+  filtered = filtered.filter(device => (device.category || '').trim().toLowerCase() === selected);
+}
     if (searchTerm) {
       filtered = filtered.filter(device =>
         device.deviceName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -50,7 +79,6 @@ export default function DevicesPage() {
 
     setFilteredDevices(filtered);
   }, [searchTerm, selectedCategory, devices]);
-  const { language } =    useLanguageStore();
   type Localized<T> = T & Record<string, any>;
 
 const pick = (item: Localized<any> | undefined, key: string, fallback = "") => {
@@ -88,10 +116,10 @@ const pick = (item: Localized<any> | undefined, key: string, fallback = "") => {
 
       {/* Filters Section */}
       <section className="w-full bg-surfacealt py-8 sticky top-[73px] z-40">
-        <div className="mx-auto max-w-[120rem] px-6 lg:px-12">
+        <div className="mx-auto max-w-[120rem] px-6  lg:px-12">
           <div className="flex flex-col lg:flex-row gap-6 items-start lg:items-center justify-between">
             {/* Search */}
-            <div className="relative w-full lg:w-96">
+            <div className="relative w-full py-8 lg:w-96">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-foreground/40" />
               <Input
                 type="text"
@@ -101,26 +129,27 @@ const pick = (item: Localized<any> | undefined, key: string, fallback = "") => {
                 className="pl-12 bg-background border-foreground/20 font-paragraph"
               />
             </div>
-
+</div>
             {/* Category Filter */}
-            <div className="flex items-center gap-3 flex-wrap">
-              <Filter className="w-5 h-5 text-foreground/60" />
-              {categories.map((category) => (
-                <Button
-                  key={category}
-                  onClick={() => setSelectedCategory(category)}
-                  variant={selectedCategory === category ? 'default' : 'outline'}
-                  className={`font-paragraph text-sm rounded-lg ${
-                    selectedCategory === category
-                      ? 'bg-secondary text-secondary-foreground hover:bg-secondary/90'
-                      : 'border-foreground/20 hover:border-secondary'
-                  }`}
-                >
-                  {category}
-                </Button>
-              ))}
-            </div>
-          </div>
+          <div className="flex items-center gap-3  flex-wrap">
+  <Filter className="w-5 h-5 text-foreground/60" />
+
+  {categories.map((category) => (
+    <Button
+      key={category.value}
+      onClick={() => setSelectedCategory(category.value)}
+      variant={selectedCategory === category.value ? 'default' : 'outline'}
+      className={`font-paragraph text-sm rounded-lg ${
+        selectedCategory === category.value
+          ? 'bg-secondary text-secondary-foreground hover:bg-secondary/90'
+          : 'border-foreground/20 hover:border-secondary'
+      }`}
+    >
+      {category.label}
+    </Button>
+  ))}
+</div>
+
 
           <div className="mt-4">
             <p className="font-paragraph text-sm text-foreground/60">

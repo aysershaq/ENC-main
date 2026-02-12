@@ -162,7 +162,23 @@ contactinfoDesc:`Connect with us through any of the following channels. Our team
 visit:"Visit Our Office",
 visitDesc:`Located in the zawiat al-dahmani alshaat street, our office is easily accessible for in-person consultations.
 
-`
+`,
+office:"Our Office",
+officeDesc:`Tripoli,Libya
+zawiat dahmani ,alshat road
+`,
+phoneNum:"Phone",
+email:"Email",
+send:"Send Us a Message",
+name:"Full Name *",
+emailSend:"Email Address *",
+phoneNumber:"Phone Number",
+subject:"subject *",
+Message:"Message *",
+sendUs:"Send Message",
+
+all:"All"
+
 
 
   },
@@ -318,8 +334,23 @@ getIn:"تواصل معنا",
 getInDesc:`هل لديك أسئلة حول خدماتنا أو تحتاج إلى دعم فني؟ نحن هنا لمساعدتك. تواصل مع فريقنا وسنرد عليك في أقرب وقت ممكن.`,
 contactinfo:"معلومات الاتصال ",
 contactinfoDesc:`تواصل معنا عبر أي من القنوات التالية. فريقنا جاهز لمساعدتك في تلبية احتياجاتك في مجال الاتصالات.`,
-visit:"زر مكتبنا ",
-visitDesc:  `مكتبنا يقع فى زاوية الدهماني شارع الشط , يسهل الوصول إلى مكتبنا لإجراء الاستشارات الشخصية.`
+visit:"زوروا مكتبنا ",
+visitDesc:  `مكتبنا يقع فى زاوية الدهماني شارع الشط , يسهل الوصول إلى مكتبنا لإجراء الاستشارات الشخصية.`,
+office:"مكتبنا",
+officeDesc:`طرابلس ,ليبيا 
+زاوية الدهماني ,شارع الشط
+`,
+phoneNum:"الهاتف",
+email:"الايميل",
+send:"ارسل الينا رسالة ",
+name:"الاسم بالكامل *",
+emailSend:"عنوان البريد الالكتروني *",
+phoneNumber:"رقم الهاتف",
+subject:"الموضوع *",
+Message:"الرسالة  *",
+sendUs:"أرسل",
+all:"الكل"
+
 },
 };
 

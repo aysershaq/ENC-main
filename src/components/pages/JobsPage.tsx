@@ -9,6 +9,9 @@ import { t } from '@/lib/translations';
 import { useLanguageStore } from '@/stores/languageStore';
 export default function JobsPage() {
   const [jobs, setJobs] = useState<JobOpenings[]>([]);
+  // داخل JobsPage أو صفحة Apply
+const [cvFile, setCvFile] = useState<File | null>(null);
+
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -19,7 +22,42 @@ export default function JobsPage() {
     fetchJobs();
   }, []);
   const { language } =    useLanguageStore();
+const [cvByJob, setCvByJob] = useState<Record<string, File | null>>({});
+const [applyStatus, setApplyStatus] = useState<Record<string, "idle" | "sending" | "success" | "error">>({});
 
+async function submitCv(job: JobOpenings) {
+  const cvFile = cvByJob[job._id] ?? null;
+  if (!cvFile) {
+    alert("Please select a CV file first.");
+    return;
+  }
+
+  setApplyStatus((p) => ({ ...p, [job._id]: "sending" }));
+
+  const fd = new FormData();
+  fd.append("name", "");         // لو عندك حقول اسم/إيميل بالواجهة، عبّيها هنا
+  fd.append("email", "");
+  fd.append("phone", "");
+  fd.append("jobTitle", job.jobTitle ?? "");
+  fd.append("message", "");
+  fd.append("cv", cvFile);
+
+  const resp = await fetch("http://localhost:3001/api/jobs/apply", {
+    method: "POST",
+    body: fd,
+  });
+
+  if (!resp.ok) {
+    setApplyStatus((p) => ({ ...p, [job._id]: "error" }));
+    const err = await resp.json().catch(() => ({}));
+    console.error("Apply error:", err);
+    alert("Failed to send. Check server logs.");
+    return;
+  }
+
+  setApplyStatus((p) => ({ ...p, [job._id]: "success" }));
+  alert("CV sent successfully!");
+}
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -184,14 +222,41 @@ export default function JobsPage() {
                       </div>
                     </div>
 
-                    <div className="lg:flex-shrink-0">
-                      <a
-                        href="/contact"
-                        className="inline-flex items-center gap-2 bg-secondary text-secondary-foreground font-paragraph text-base px-8 py-4 rounded-lg hover:opacity-90 transition-opacity whitespace-nowrap"
-                      >
-                        Apply Now
-                      </a>
-                    </div>
+<div className="lg:flex-shrink-0 w-full mt-6">
+  <form
+    onSubmit={(e) => {
+      e.preventDefault();
+      submitCv(job);
+    }}
+    className="space-y-4"
+  >
+    <input
+      type="file"
+      accept=".pdf,.doc,.docx"
+      onChange={(e) =>
+        setCvByJob((prev) => ({
+          ...prev,
+          [job._id]: e.target.files?.[0] ?? null,
+        }))
+      }
+      className="block w-full text-sm text-gray-600
+                file:mr-4 file:py-2 file:px-4
+                file:rounded-lg file:border-0
+                file:text-sm file:font-semibold
+                file:bg-secondary file:text-secondary-foreground
+                hover:file:opacity-90"
+    />
+
+    <button
+      type="submit"
+      disabled={applyStatus[job._id] === "sending"}
+      className="w-[1/4]  bg-secondary text-secondary-foreground px-6 py-3 rounded-lg hover:opacity-90 disabled:opacity-60"
+    >
+      {applyStatus[job._id] === "sending" ? "Sending..." : "Submit CV"}
+    </button>
+  </form>
+</div>
+
                   </div>
                 </motion.div>
               ))}

@@ -8,6 +8,8 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { t } from '@/lib/translations';
 import { useLanguageStore } from '@/stores/languageStore';
+//import emailjs from '@emailjs/browser';
+
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -26,29 +28,29 @@ export default function ContactPage() {
       [e.target.name]: e.target.value,
     });
   };
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsSubmitting(true);
+  setSubmitStatus("idle");
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitStatus('idle');
+  try {
+    const res = await fetch("http://localhost:3001/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
 
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitStatus('success');
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        subject: '',
-        message: '',
-      });
+    if (!res.ok) throw new Error("Failed");
 
-      setTimeout(() => {
-        setSubmitStatus('idle');
-      }, 5000);
-    }, 1500);
-  };
+    setSubmitStatus("success");
+    setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+  } catch {
+    setSubmitStatus("error");
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+;
   const { language } =    useLanguageStore();
 
   return (
@@ -56,7 +58,7 @@ export default function ContactPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="w-full bg-primary py-20">
+      <section className="w-full bg-[#72849C] py-20">
         <div className="mx-auto max-w-[120rem] px-6 lg:px-12">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -98,11 +100,11 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-heading text-xl text-foreground mb-2">
-                      Our Office
+                      {t("office",language)}
                     </h3>
                     <p className="font-paragraph text-base text-foreground/70">
-                      Tripoli, Libya<br />
-                      zawiat al-dahmani alshaat street
+                      {t("officeDesc",language)}
+
                     </p>
                   </div>
                 </div>
@@ -113,11 +115,11 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-heading text-xl text-foreground mb-2">
-                      Phone
+                      {t("phoneNum",language)}
                     </h3>
                     <p className="font-paragraph text-base text-foreground/70">
                       +218 213409103<br />
-                      San-Fri: 8:00 AM - 3:00 PM
+                      
                     </p>
                   </div>
                 </div>
@@ -128,7 +130,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-heading text-xl text-foreground mb-2">
-                      Email
+                      {t("email",language)}
                     </h3>
                     <p className="font-paragraph text-base text-foreground/70">
                       it@enc.ly<br />
@@ -138,23 +140,8 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Office Hours */}
-              <div className="mt-12 bg-surfacealt rounded-2xl p-8">
-                <h3 className="font-heading text-2xl text-foreground mb-6">
-                  Office Hours
-                </h3>
-                <div className="space-y-3">
-                  <div className="flex justify-between">
-                    <span className="font-paragraph text-base text-foreground/70">Sunday - Thursday</span>
-                    <span className="font-paragraph text-base text-foreground">3:00 PM - 8:00 AM</span>
-                  </div>
-                 
-                  <div className="flex justify-between">
-                    <span className="font-paragraph text-base text-foreground/70">Saturday - Friday</span>
-                    <span className="font-paragraph text-base text-foreground">Closed</span>
-                  </div>
-                </div>
-              </div>
+           
+          
             </motion.div>
 
             {/* Contact Form */}
@@ -163,15 +150,17 @@ export default function ContactPage() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              <div className="bg-primary rounded-2xl p-8 lg:p-12">
+              <div className="bg-[#72849C]  rounded-2xl p-8 lg:p-12">
                 <h2 className="font-heading text-3xl text-primary-foreground mb-8">
-                  Send Us a Message
+                  {t("send",language)}
+
                 </h2>
 
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form   onSubmit={handleSubmit}     action="https://formsubmit.co/ayser.shaqruni1995@gmail.com" method="POST" className="space-y-6">
                   <div>
                     <label htmlFor="name" className="font-paragraph text-sm text-primary-foreground/80 mb-2 block">
-                      Full Name *
+                    {t("name",language)}
+
                     </label>
                     <Input
                       id="name"
@@ -181,13 +170,13 @@ export default function ContactPage() {
                       value={formData.name}
                       onChange={handleChange}
                       className="bg-background border-background font-paragraph"
-                      placeholder="Your name"
+                      placeholder="اسمك"
                     />
                   </div>
 
                   <div>
                     <label htmlFor="email" className="font-paragraph text-sm text-primary-foreground/80 mb-2 block">
-                      Email Address *
+                  {t("emailSend",language)}
                     </label>
                     <Input
                       id="email"
@@ -203,7 +192,7 @@ export default function ContactPage() {
 
                   <div>
                     <label htmlFor="phone" className="font-paragraph text-sm text-primary-foreground/80 mb-2 block">
-                      Phone Number
+                  {t("phoneNumber",language)}
                     </label>
                     <Input
                       id="phone"
@@ -218,7 +207,7 @@ export default function ContactPage() {
 
                   <div>
                     <label htmlFor="subject" className="font-paragraph text-sm text-primary-foreground/80 mb-2 block">
-                      Subject *
+                  {t("subject",language)}
                     </label>
                     <Input
                       id="subject"
@@ -228,13 +217,14 @@ export default function ContactPage() {
                       value={formData.subject}
                       onChange={handleChange}
                       className="bg-background border-background font-paragraph"
-                      placeholder="How can we help?"
+                      placeholder="كيف يمكننا المساعدة "
                     />
                   </div>
 
                   <div>
                     <label htmlFor="message" className="font-paragraph text-sm text-primary-foreground/80 mb-2 block">
-                      Message *
+                   {t("Message",language)}
+
                     </label>
                     <Textarea
                       id="message"
@@ -244,7 +234,7 @@ export default function ContactPage() {
                       onChange={handleChange}
                       rows={6}
                       className="bg-background border-background font-paragraph resize-none"
-                      placeholder="Tell us more about your inquiry..."
+                      placeholder="اخبرنا بالمزيد عن طلبك"
                     />
                   </div>
 
@@ -274,7 +264,7 @@ export default function ContactPage() {
                     ) : (
                       <>
                         <Send className="w-5 h-5 mr-2" />
-                        Send Message
+                        {t("sendUs",language)}
                       </>
                     )}
                   </Button>
@@ -306,7 +296,7 @@ export default function ContactPage() {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="bg-primary rounded-2xl p-8 lg:p-12"
+            className="bg-[#72849C] rounded-2xl p-8 lg:p-12"
           >
            <div className="aspect-video rounded-xl overflow-hidden">
   <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3350.0196819749026!2d13.212088925575156!3d32.897647877813576!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13a8928e17b92623%3A0xd7d2c1a8f7def3b3!2sEtisalat%20Nawiaa%20Company%20ENC!5e0!3m2!1sar!2sly!4v1770716272209!5m2!1sar!2sly"  className='w-full h-full'  loading="lazy" ></iframe>
@@ -317,5 +307,7 @@ export default function ContactPage() {
 
       <Footer />
     </div>
+
+
   );
 }

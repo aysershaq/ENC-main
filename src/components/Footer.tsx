@@ -7,7 +7,7 @@ export default function Footer() {
   const { language } = useLanguageStore();
 
   return (
-    <footer className={`bg-primary text-primary-foreground mt-24 ${language === 'ar' ? 'rtl' : 'ltr'}`}>
+    <footer className={`bg-[#72849C] text-primary-foreground mt-24 ${language === 'ar' ? 'rtl' : 'ltr'}`}>
       <div className="mx-auto max-w-[120rem] px-6 lg:px-12 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Company Info */}
